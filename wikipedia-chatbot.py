@@ -3,6 +3,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas
 import numpy
+import wikipedia
 
 
 def lemmatize(sentence):
@@ -31,7 +32,7 @@ def lemmatize(sentence):
     return lemmas
 
 
-def process(text, question):
+def process(text, question, coeff=0.3):
     tv = TfidfVectorizer(tokenizer=lemmatize)
 
     # split text into sentences
@@ -60,16 +61,21 @@ def process(text, question):
     # print(vf[values.argmax()])
     # print(sentence_tokens[values.argmax()])
 
-    return sentence_tokens[values.argmax()]
+    if values.argmax() > coeff:
+        return sentence_tokens[values.argmax()]
 
 
 if __name__ == '__main__':
-    with open('sentences.txt') as f:
-        sentences = f.read()
-
+    # with open('sentences.txt') as f:
+    #     sentences = f.read()
+    sentences = wikipedia.page('Vegetables').content
     while True:
         question = input('Hi, what do you want to know?\n')
         print(f'{question = }')
+
+        if question == 'quit':
+            break
+
         answer = process(sentences, question)
-        print(f'{answer = }')
+        print(f'{answer or "I dont know"}')
 
