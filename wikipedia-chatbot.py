@@ -66,11 +66,10 @@ def process(text, question):
 if __name__ == '__main__':
     with open('sentences.txt') as f:
         sentences = f.read()
-    print(sentences)
 
-    question = 'What are vegetables?'
-
-    print(f'{question = }')
-    answer = process(sentences, question)
-    print(f'{answer = }')
+    while True:
+        question = input('Hi, what do you want to know?\n')
+        print(f'{question = }')
+        answer = process(sentences, question)
+        print(f'{answer = }')
 
