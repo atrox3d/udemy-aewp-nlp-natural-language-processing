@@ -4,6 +4,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import pandas
 import numpy
 import wikipedia
+import wikipedia.exceptions
 
 
 def lemmatize(sentence):
@@ -70,17 +71,26 @@ if __name__ == '__main__':
     #     sentences = f.read()
     # sentences = wikipedia.page('Vegetables').content
     while True:
-        topic = input('Choose a topic: ')
-        sentences = wikipedia.page(topic).content
-        question = input('Hi, what do you want to know?\n')
-        print(f'{question = }')
+        try:
+            topic = input('Choose a topic: ')
+            # result = wikipedia.search(topic)
+            # print(result)
+            # continue
+            if topic == 'quit':
+                break
+            sentences = wikipedia.page(topic).content
+        except wikipedia.exceptions.DisambiguationError as wde:
+            print(wde)
+        while True:
+            question = input('Hi, what do you want to know?\n')
+            print(f'{question = }')
 
-        if question == 'quit':
-            break
-        elif question == 'content':
-            print(sentences)
-            continue
+            if question == 'quit':
+                break
+            elif question == 'content':
+                print(sentences)
+                continue
 
-        answer = process(sentences, question)
-        print(f'{answer or "I dont know"}')
+            answer = process(sentences, question)
+            print(f'{answer or "I dont know"}')
 
