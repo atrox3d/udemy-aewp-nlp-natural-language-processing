@@ -81,6 +81,7 @@ if __name__ == '__main__':
             sentences = wikipedia.page(topic).content
         except wikipedia.exceptions.DisambiguationError as wde:
             print(wde)
+            continue
         while True:
             question = input('Hi, what do you want to know?\n')
             print(f'{question = }')
