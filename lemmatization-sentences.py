@@ -20,12 +20,13 @@ def lemmatize(sentence):
     return lemmas
 
 
-s1 = 'Vegetables are types of plants.'
-l1 = lemmatize(s1)
-print(l1)
+if __name__ == '__main__':
+    s1 = 'Vegetables are types of plants.'
+    l1 = lemmatize(s1)
+    print(l1)
 
-s2 = 'A Vegetables is a types of plant.'
-l2 = lemmatize(s2)
-print(l2)
+    s2 = 'A Vegetables is a types of plant.'
+    l2 = lemmatize(s2)
+    print(l2)
 
-print(f'{l1==l2 = }')
+    print(f'{l1==l2 = }')
