@@ -68,13 +68,18 @@ def process(text, question, coeff=0.3):
 if __name__ == '__main__':
     # with open('sentences.txt') as f:
     #     sentences = f.read()
-    sentences = wikipedia.page('Vegetables').content
+    # sentences = wikipedia.page('Vegetables').content
     while True:
+        topic = input('Choose a topic: ')
+        sentences = wikipedia.page(topic).content
         question = input('Hi, what do you want to know?\n')
         print(f'{question = }')
 
         if question == 'quit':
             break
+        elif question == 'content':
+            print(sentences)
+            continue
 
         answer = process(sentences, question)
         print(f'{answer or "I dont know"}')
